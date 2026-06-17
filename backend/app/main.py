@@ -20,3 +20,6 @@ app.include_router(customers_router)
 from app.products_api import router as products_router  # noqa: E402
 
 app.include_router(products_router)
+from app.suppliers_api import router as suppliers_router  # noqa: E402
+
+app.include_router(suppliers_router)
