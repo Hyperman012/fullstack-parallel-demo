@@ -22,3 +22,8 @@ def test_post_customers_creates_and_returns_id():
     body = response.json()
     assert body["id"] is not None
     assert body["name"] == "Wayne Enterprises"
+
+
+def test_post_customers_blank_name_returns_422():
+    response = client.post("/customers", json={"name": ""})
+    assert response.status_code == 422

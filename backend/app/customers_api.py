@@ -1,6 +1,6 @@
 """Customers API router."""
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app import customers_repo
@@ -10,7 +10,7 @@ router = APIRouter()
 
 
 class CustomerIn(BaseModel):
-    name: str
+    name: str = Field(min_length=1)
 
 
 @router.get("/customers")
