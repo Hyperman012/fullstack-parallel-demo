@@ -26,3 +26,14 @@ def test_get_returns_the_saved_product():
         assert product.price == 4.50
     finally:
         session.close()
+
+
+def test_list_returns_multiple_products():
+    session = _session()
+    try:
+        products_repo.create(session, name="Alpha", price=1.0)
+        products_repo.create(session, name="Beta", price=2.0)
+        names = {p.name for p in products_repo.list(session)}
+        assert {"Alpha", "Beta"} <= names
+    finally:
+        session.close()
