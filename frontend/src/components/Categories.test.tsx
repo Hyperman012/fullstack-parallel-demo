@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Categories from './Categories'
 import { getCategories, createCategory, type Category } from '../categories'
 
@@ -26,4 +27,21 @@ test('renders a row from the mocked client', async () => {
   await waitFor(() => {
     expect(screen.getByText('Hardware')).toBeInTheDocument()
   })
+})
+
+test('submitting the form calls createCategory', async () => {
+  getCategoriesMock.mockResolvedValue([])
+  createCategoryMock.mockResolvedValue({ id: 5, name: 'Software' } as Category)
+  render(<Categories />)
+  await waitFor(() => {
+    expect(screen.getByText(/no categories yet/i)).toBeInTheDocument()
+  })
+
+  await userEvent.type(screen.getByLabelText(/name/i), 'Software')
+  await userEvent.click(screen.getByRole('button', { name: /add/i }))
+
+  await waitFor(() => {
+    expect(createCategoryMock).toHaveBeenCalledWith('Software')
+  })
+  expect(screen.getByText('Software')).toBeInTheDocument()
 })
