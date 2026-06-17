@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Home from './components/Home'
 import Customers from './components/Customers'
 import Products from './components/Products'
+import Categories from './components/Categories'
 
 export type Route = { path: string; label: string; element: ReactNode }
 
@@ -11,4 +12,5 @@ export const routes: Route[] = [
   // --- ROUTE REGISTRY ---
   { path: '/customers', label: 'Customers', element: <Customers /> },
   { path: '/products', label: 'Products', element: <Products /> },
+  { path: '/categories', label: 'Categories', element: <Categories /> },
 ]
