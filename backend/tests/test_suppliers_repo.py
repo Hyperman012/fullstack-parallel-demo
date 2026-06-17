@@ -26,3 +26,15 @@ def test_get_returns_saved_supplier():
         assert found.name == "Globex"
     finally:
         session.close()
+
+
+def test_list_returns_multiple():
+    session = _session()
+    try:
+        suppliers_repo.create(session, "Initech")
+        suppliers_repo.create(session, "Umbrella")
+        names = [s.name for s in suppliers_repo.list(session)]
+        assert "Initech" in names
+        assert "Umbrella" in names
+    finally:
+        session.close()
