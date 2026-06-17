@@ -26,3 +26,15 @@ def test_get_returns_saved_category():
         assert found.name == "Software"
     finally:
         session.close()
+
+
+def test_list_returns_multiple():
+    session = _session()
+    try:
+        categories_repo.create(session, "Hardware")
+        categories_repo.create(session, "Software")
+        names = [c.name for c in categories_repo.list(session)]
+        assert "Hardware" in names
+        assert "Software" in names
+    finally:
+        session.close()
