@@ -19,3 +19,11 @@ test('renders an empty state when there are no categories', async () => {
     expect(screen.getByText(/no categories yet/i)).toBeInTheDocument()
   })
 })
+
+test('renders a row from the mocked client', async () => {
+  getCategoriesMock.mockResolvedValue([{ id: 1, name: 'Hardware' }] as Category[])
+  render(<Categories />)
+  await waitFor(() => {
+    expect(screen.getByText('Hardware')).toBeInTheDocument()
+  })
+})
