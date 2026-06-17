@@ -17,3 +17,6 @@ def health() -> dict[str, str]:
 from app.customers_api import router as customers_router  # noqa: E402
 
 app.include_router(customers_router)
+from app.products_api import router as products_router  # noqa: E402
+
+app.include_router(products_router)
