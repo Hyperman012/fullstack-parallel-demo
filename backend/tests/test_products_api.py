@@ -23,3 +23,8 @@ def test_post_products_creates_and_returns_201_with_id():
     assert body["id"] is not None
     assert body["name"] == "Widget"
     assert body["price"] == 9.99
+
+
+def test_post_products_rejects_negative_price_with_422():
+    response = client.post("/products", json={"name": "Bad", "price": -1.0})
+    assert response.status_code == 422

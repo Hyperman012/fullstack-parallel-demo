@@ -1,6 +1,6 @@
 """Products API router."""
 from fastapi import APIRouter, Depends, status
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app import products_repo
@@ -11,7 +11,7 @@ router = APIRouter()
 
 class ProductIn(BaseModel):
     name: str
-    price: float
+    price: float = Field(ge=0)
 
 
 @router.get("/products")
