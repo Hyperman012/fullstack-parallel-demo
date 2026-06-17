@@ -14,3 +14,15 @@ def test_create_returns_id():
         assert new_id is not None
     finally:
         session.close()
+
+
+def test_get_returns_saved_category():
+    session = _session()
+    try:
+        new_id = categories_repo.create(session, "Software")
+        found = categories_repo.get(session, new_id)
+        assert found is not None
+        assert found.id == new_id
+        assert found.name == "Software"
+    finally:
+        session.close()
