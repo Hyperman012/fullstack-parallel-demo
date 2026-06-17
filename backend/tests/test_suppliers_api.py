@@ -14,3 +14,11 @@ def test_get_suppliers_returns_list():
     response = client.get("/suppliers")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
+
+
+def test_post_suppliers_creates_and_returns_id():
+    response = client.post("/suppliers", json={"name": "Wayne Enterprises"})
+    assert response.status_code == 201
+    body = response.json()
+    assert body["id"] is not None
+    assert body["name"] == "Wayne Enterprises"
