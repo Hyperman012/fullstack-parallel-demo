@@ -26,3 +26,15 @@ def test_get_returns_saved_customer():
         assert found.name == "Globex"
     finally:
         session.close()
+
+
+def test_list_returns_multiple():
+    session = _session()
+    try:
+        customers_repo.create(session, "Initech")
+        customers_repo.create(session, "Umbrella")
+        names = [c.name for c in customers_repo.list(session)]
+        assert "Initech" in names
+        assert "Umbrella" in names
+    finally:
+        session.close()
