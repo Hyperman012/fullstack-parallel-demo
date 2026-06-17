@@ -14,3 +14,6 @@ def health() -> dict[str, str]:
 
 
 # --- ROUTER REGISTRY (append one include_router per feature card) ---
+from app.customers_api import router as customers_router  # noqa: E402
+
+app.include_router(customers_router)
