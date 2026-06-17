@@ -39,3 +39,13 @@ def test_get_categories_returns_list():
     assert response.status_code == 200
     body = response.json()
     assert body == [{"id": 1, "name": "Hardware"}]
+
+
+def test_post_categories_creates_and_returns_id():
+    repo = FakeCategoryRepository()
+    client = make_client(repo)
+    response = client.post("/categories", json={"name": "Software"})
+    assert response.status_code == 201
+    body = response.json()
+    assert body["id"] is not None
+    assert body["name"] == "Software"
