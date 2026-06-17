@@ -14,3 +14,15 @@ def test_create_returns_id():
         assert new_id is not None
     finally:
         session.close()
+
+
+def test_get_returns_saved_supplier():
+    session = _session()
+    try:
+        new_id = suppliers_repo.create(session, "Globex")
+        found = suppliers_repo.get(session, new_id)
+        assert found is not None
+        assert found.id == new_id
+        assert found.name == "Globex"
+    finally:
+        session.close()
