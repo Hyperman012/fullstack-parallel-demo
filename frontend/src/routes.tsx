@@ -3,6 +3,7 @@ import Home from './components/Home'
 import Customers from './components/Customers'
 import Products from './components/Products'
 import Categories from './components/Categories'
+import Suppliers from './components/Suppliers'
 
 export type Route = { path: string; label: string; element: ReactNode }
 
@@ -13,4 +14,5 @@ export const routes: Route[] = [
   { path: '/customers', label: 'Customers', element: <Customers /> },
   { path: '/products', label: 'Products', element: <Products /> },
   { path: '/categories', label: 'Categories', element: <Categories /> },
+  { path: '/suppliers', label: 'Suppliers', element: <Suppliers /> },
 ]
